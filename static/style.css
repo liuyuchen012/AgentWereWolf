@@ -46,6 +46,57 @@ body {
     display: flex;
 }
 
+/* ========== 登录界面 ========== */
+#login-screen {
+    justify-content: center;
+    align-items: center;
+    background: radial-gradient(ellipse at center, #1a1a2e 0%, #0d0d1a 100%);
+}
+
+.login-content {
+    text-align: center;
+    padding: 40px;
+    width: 100%;
+    max-width: 420px;
+}
+
+.login-content .setup-form {
+    margin-bottom: 0;
+}
+
+.login-error {
+    background: rgba(231, 76, 60, 0.12);
+    border: 1px solid var(--accent-red);
+    color: var(--accent-red);
+    border-radius: 8px;
+    padding: 10px 14px;
+    margin-bottom: 16px;
+    font-size: 0.9rem;
+    text-align: left;
+}
+
+.welcome-footer {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    margin-top: 18px;
+    color: var(--text-secondary);
+    font-size: 0.9rem;
+}
+
+.btn-link {
+    background: none;
+    border: none;
+    color: var(--text-secondary);
+    padding: 4px 0;
+    font-size: 0.9rem;
+    text-decoration: underline;
+}
+
+.btn-link:hover {
+    color: var(--accent-gold);
+}
+
 /* ========== 欢迎界面 ========== */
 #welcome-screen {
     justify-content: center;

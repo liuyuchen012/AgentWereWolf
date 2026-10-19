@@ -19,11 +19,18 @@ class WolfChaGame {
         this.seats = [];
         this.playerCount = 10;
         this.isSpectator = false;
+        this.currentUser = null;
 
         this.init();
     }
 
     init() {
+        // 登录页
+        document.getElementById('login-form').addEventListener('submit', (e) => {
+            e.preventDefault();
+            this.doLogin();
+        });
+        document.getElementById('logout-btn').addEventListener('click', () => this.doLogout());
         // 欢迎页
         document.getElementById('create-room-btn').addEventListener('click', () => this.createRoom());
         // 大厅
@@ -42,8 +49,98 @@ class WolfChaGame {
             }
         });
 
+        // 先校验会话，再决定是否进入主界面
+        this.bootstrap();
+    }
+
+    async bootstrap() {
+        const authed = await this.checkAuth();
+        if (authed) {
+            this.enterApp();
+        } else {
+            this.showScreen('login-screen');
+        }
+    }
+
+    async checkAuth() {
+        try {
+            const resp = await fetch('/api/check_auth', { credentials: 'same-origin' });
+            if (!resp.ok) return false;
+            const data = await resp.json();
+            this.currentUser = data.username;
+            return true;
+        } catch (e) {
+            console.error('Check auth error:', e);
+            return false;
+        }
+    }
+
+    enterApp() {
+        document.getElementById('welcome-user').textContent = this.currentUser ? `已登录: ${this.currentUser}` : '';
+        this.showScreen('welcome-screen');
         // 检查 URL 是否是房间链接
         this.checkUrlForRoom();
+    }
+
+    async doLogin() {
+        const username = document.getElementById('login-username').value.trim();
+        const password = document.getElementById('login-password').value;
+        const errorEl = document.getElementById('login-error');
+        const btn = document.getElementById('login-btn');
+
+        if (!username || !password) {
+            errorEl.textContent = '请输入账户和密码';
+            errorEl.style.display = 'block';
+            return;
+        }
+
+        btn.disabled = true;
+        btn.textContent = '登录中...';
+        try {
+            const resp = await fetch('/api/login', {
+                method: 'POST',
+                headers: { 'Content-Type': 'application/json' },
+                credentials: 'same-origin',
+                body: JSON.stringify({ username, password })
+            });
+            const data = await resp.json().catch(() => ({}));
+            if (!resp.ok) {
+                errorEl.textContent = data.detail || '登录失败';
+                errorEl.style.display = 'block';
+                return;
+            }
+            errorEl.style.display = 'none';
+            document.getElementById('login-password').value = '';
+            this.currentUser = data.username;
+            this.enterApp();
+        } catch (e) {
+            console.error('Login error:', e);
+            errorEl.textContent = '登录失败，请检查网络';
+            errorEl.style.display = 'block';
+        } finally {
+            btn.disabled = false;
+            btn.textContent = '登录';
+        }
+    }
+
+    async doLogout() {
+        try {
+            await fetch('/api/logout', { method: 'POST', credentials: 'same-origin' });
+        } catch (e) {
+            console.error('Logout error:', e);
+        }
+        if (this.ws) {
+            this.ws.close();
+            this.ws = null;
+        }
+        this.currentUser = null;
+        this.roomId = null;
+        this.uid = null;
+        this.isOwner = false;
+        this.mySeat = null;
+        this.gameStarted = false;
+        history.pushState(null, '', '/');
+        this.showScreen('login-screen');
     }
 
     checkUrlForRoom() {
@@ -68,6 +165,10 @@ class WolfChaGame {
                 headers: { 'Content-Type': 'application/json' },
                 body: JSON.stringify({ player_count: playerCount, difficulty })
             });
+            if (resp.status === 401) {
+                this.handleUnauthorized();
+                return;
+            }
             const data = await resp.json();
             this.roomId = data.room_id;
             this.uid = data.owner_id;
@@ -123,8 +224,11 @@ class WolfChaGame {
                 reject(error);
             };
 
-            this.ws.onclose = () => {
-                console.log('WebSocket closed');
+            this.ws.onclose = (event) => {
+                console.log('WebSocket closed', event.code);
+                if (event.code === 4401) {
+                    this.handleUnauthorized('登录状态已失效，请重新登录');
+                }
             };
         });
     }
@@ -188,7 +292,26 @@ class WolfChaGame {
             case 'error':
                 alert(message.data.message);
                 break;
+            case 'auth_error':
+                this.handleUnauthorized(message.data.message);
+                break;
         }
+    }
+
+    handleUnauthorized(msg) {
+        if (this.ws) {
+            this.ws.close();
+            this.ws = null;
+        }
+        this.currentUser = null;
+        this.roomId = null;
+        this.uid = null;
+        this.isOwner = false;
+        this.mySeat = null;
+        this.gameStarted = false;
+        history.pushState(null, '', '/');
+        this.showScreen('login-screen');
+        alert(msg || '登录状态已失效，请重新登录');
     }
 
     handleConnected(data) {

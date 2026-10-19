@@ -1,11 +1,15 @@
 """FastAPI 后端 - 狼人杀游戏服务"""
 
 import asyncio
+import hashlib
+import hmac
 import json
 import os
+import secrets
+import time
 import uuid
-from typing import Dict, List, Optional, Set
-from fastapi import FastAPI, WebSocket, WebSocketDisconnect, HTTPException
+from typing import Dict, List, Optional, Set, Tuple
+from fastapi import Cookie, Depends, FastAPI, Response, WebSocket, WebSocketDisconnect, HTTPException
 from fastapi.staticfiles import StaticFiles
 from fastapi.responses import HTMLResponse, FileResponse
 from pydantic import BaseModel
@@ -15,6 +19,126 @@ from game_controller import GameController, GameEvent
 
 
 app = FastAPI(title="AgentWereWolf 狼人杀游戏")
+
+# ========== 登录鉴权 ==========
+
+SESSION_COOKIE = "wolfcha_session"
+SESSION_TTL = 12 * 3600           # 会话有效期（秒）
+LOGIN_LOCK_THRESHOLD = 5          # 连续失败次数达到该值后锁定
+LOGIN_LOCK_SECONDS = 60           # 锁定时长（秒）
+
+# 内置账户。口令以 SHA-256 摘要存放，避免在源码里留明文；
+# 也可通过环境变量 GAME_USERS="user1:pass1,user2:pass2" 覆盖（明文即可）。
+_DEFAULT_USERS: Dict[str, str] = {
+    "zxz": "37469c365831c2f977024145ce9bef4744e31b13f4d0e6217dbcbcf58ed3fce4",
+    "lyc": "587099658132ab3eb56618bbc684016fb7c32810765ec0cd2a6433909b846db6",
+}
+
+
+def _load_users() -> Dict[str, str]:
+    """加载账户表，优先使用环境变量 GAME_USERS"""
+    raw = os.getenv("GAME_USERS", "").strip()
+    if not raw:
+        return dict(_DEFAULT_USERS)
+    users: Dict[str, str] = {}
+    for item in raw.split(","):
+        if ":" in item:
+            username, password = item.split(":", 1)
+            username, password = username.strip(), password.strip()
+            if username and password:
+                users[username] = password
+    return users or dict(_DEFAULT_USERS)
+
+
+USERS: Dict[str, str] = _load_users()
+
+# token -> {"username": str, "expire": float}
+sessions: Dict[str, dict] = {}
+# username -> (失败次数, 解锁时间戳)
+_login_failures: Dict[str, Tuple[int, float]] = {}
+
+
+def _verify_password(stored: str, provided: str) -> bool:
+    """校验口令：摘要用 SHA-256 比对，明文则用恒定时间比较"""
+    stored = stored.strip()
+    if len(stored) == 64 and all(c in "0123456789abcdefABCDEF" for c in stored):
+        provided = hashlib.sha256(provided.encode("utf-8")).hexdigest()
+    return hmac.compare_digest(stored, provided)
+
+
+def get_session_user(token: Optional[str]) -> Optional[str]:
+    """由会话 token 解析用户名，过期或无效返回 None"""
+    if not token:
+        return None
+    info = sessions.get(token)
+    if not info:
+        return None
+    if info["expire"] < time.time():
+        sessions.pop(token, None)
+        return None
+    return info["username"]
+
+
+async def require_user(
+    wolfcha_session: Optional[str] = Cookie(None, alias=SESSION_COOKIE),
+) -> str:
+    """HTTP 接口鉴权依赖：未登录抛 401"""
+    username = get_session_user(wolfcha_session)
+    if not username:
+        raise HTTPException(status_code=401, detail="未登录或会话已过期")
+    return username
+
+
+class LoginRequest(BaseModel):
+    username: str
+    password: str
+
+
+@app.post("/api/login")
+async def login(request: LoginRequest, response: Response):
+    """登录，成功后下发 HttpOnly 会话 Cookie"""
+    now = time.time()
+    lock = _login_failures.get(request.username)
+    if lock and lock[1] > now:
+        raise HTTPException(
+            status_code=429,
+            detail=f"登录尝试过于频繁，请 {int(lock[1] - now)} 秒后重试",
+        )
+
+    stored = USERS.get(request.username)
+    if stored is None or not _verify_password(stored, request.password):
+        count = (lock[0] if lock else 0) + 1
+        unlock_at = now + LOGIN_LOCK_SECONDS if count >= LOGIN_LOCK_THRESHOLD else 0
+        _login_failures[request.username] = (count, unlock_at)
+        raise HTTPException(status_code=401, detail="用户名或密码错误")
+
+    _login_failures.pop(request.username, None)
+    token = secrets.token_urlsafe(32)
+    sessions[token] = {"username": request.username, "expire": now + SESSION_TTL}
+    response.set_cookie(
+        SESSION_COOKIE,
+        token,
+        httponly=True,
+        samesite="lax",
+        max_age=SESSION_TTL,
+    )
+    return {"ok": True, "username": request.username}
+
+
+@app.post("/api/logout")
+async def logout(response: Response, wolfcha_session: Optional[str] = Cookie(None, alias=SESSION_COOKIE)):
+    """退出登录"""
+    if wolfcha_session:
+        sessions.pop(wolfcha_session, None)
+    response.delete_cookie(SESSION_COOKIE)
+    return {"ok": True}
+
+
+@app.get("/api/check_auth")
+async def check_auth(username: str = Depends(require_user)):
+    """前端启动时校验是否已有有效会话"""
+    return {"ok": True, "username": username}
+
 
 # ========== 房间管理 ==========
 
@@ -156,7 +280,7 @@ async def room_page(room_id: str):
 
 
 @app.post("/api/create_room")
-async def create_room(request: CreateRoomRequest):
+async def create_room(request: CreateRoomRequest, username: str = Depends(require_user)):
     """创建房间"""
     room_id = str(uuid.uuid4())[:8]
     owner_id = str(uuid.uuid4())
@@ -184,7 +308,7 @@ async def create_room(request: CreateRoomRequest):
 
 
 @app.get("/api/room/{room_id}")
-async def get_room_info(room_id: str):
+async def get_room_info(room_id: str, username: str = Depends(require_user)):
     """获取房间信息"""
     room = rooms.get(room_id)
     if not room:
@@ -202,6 +326,13 @@ async def get_room_info(room_id: str):
 async def websocket_endpoint(websocket: WebSocket, room_id: str, uid: str):
     """WebSocket 连接 - 每个玩家一个连接"""
     await websocket.accept()
+
+    # 会话鉴权：未登录直接断开（浏览器同源请求会自动带上会话 Cookie）
+    username = get_session_user(websocket.cookies.get(SESSION_COOKIE))
+    if not username:
+        await websocket.send_json({"type": "auth_error", "data": {"message": "未登录或会话已过期"}})
+        await websocket.close(code=4401)
+        return
 
     room = rooms.get(room_id)
     if not room:

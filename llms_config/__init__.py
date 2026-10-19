@@ -5,16 +5,42 @@
   - players.seat_N: 字符串（模型配置文件名）或 {"config": "模型名", ...覆盖参数}
 
 每个模型维护一个独立的 JSON 文件（如 qwen-plus.json, deepseek-v3.2.json）。
-.env 中的 DEEPSEEK_API_KEY / DEEPSEEK_API_BASE 作为 api_key / api_base 的默认值。
+配置文件的 api_key / api_base 留空时，按 provider 从环境变量读取
+（deepseek -> DEEPSEEK_API_KEY，dashscope -> DASHSCOPE_API_KEY，
+zenmux -> ZENMUX_API_KEY，通用兜底 LLM_API_KEY / LLM_API_BASE）。
+密钥一律不写进配置文件，只在 .env 或系统环境变量中配置。
 """
 
 import json
 import os
-from typing import Dict, Any, Optional
+from typing import Dict, Any, Optional, Tuple
 from dataclasses import dataclass
 
 
 _CONFIG_DIR = os.path.dirname(os.path.abspath(__file__))
+
+# 各 provider 对应的环境变量名：(API_KEY, API_BASE)
+# 配置文件的 api_key / api_base 留空时，回退到这里读取，密钥不入库
+_PROVIDER_ENV: Dict[str, Tuple[str, str]] = {
+    "deepseek": ("DEEPSEEK_API_KEY", "DEEPSEEK_API_BASE"),
+    "dashscope": ("DASHSCOPE_API_KEY", "DASHSCOPE_API_BASE"),
+    "openai": ("OPENAI_API_KEY", "OPENAI_API_BASE"),
+    "moonshot": ("MOONSHOT_API_KEY", "MOONSHOT_API_BASE"),
+    "zenmux": ("ZENMUX_API_KEY", "ZENMUX_API_BASE"),
+}
+
+# provider 对应的默认 API 端点（环境变量未设置时使用）
+_PROVIDER_DEFAULT_BASE: Dict[str, str] = {
+    "deepseek": "https://api.deepseek.com",
+    "dashscope": "https://dashscope.aliyuncs.com/compatible-mode/v1",
+    "openai": "https://api.openai.com/v1",
+    "moonshot": "https://api.moonshot.cn/v1",
+    "zenmux": "",
+}
+
+# 通用兜底环境变量，适用于任何 provider
+_GENERIC_KEY_ENVS = ("LLM_API_KEY", "DEEPSEEK_API_KEY")
+_GENERIC_BASE_ENVS = ("LLM_API_BASE", "DEEPSEEK_API_BASE")
 
 
 @dataclass
@@ -76,12 +102,46 @@ def _resolve_seat_config(seat_value: Any, default_cfg: Dict[str, Any]) -> Dict[s
     return dict(default_cfg)
 
 
-def _get_env_defaults() -> Dict[str, str]:
-    """从环境变量 / .env 获取 api_key 和 api_base 的默认值"""
-    return {
-        "api_key": os.getenv("DEEPSEEK_API_KEY", ""),
-        "api_base": os.getenv("DEEPSEEK_API_BASE", "https://api.deepseek.com"),
-    }
+def _env_api_key(provider: str) -> str:
+    """按 provider 从环境变量读取 API Key
+
+    读取顺序：provider 专属变量 -> LLM_API_KEY -> DEEPSEEK_API_KEY（兼容旧配置）
+    """
+    names = list(_GENERIC_KEY_ENVS)
+    if provider in _PROVIDER_ENV:
+        names.insert(0, _PROVIDER_ENV[provider][0])
+    for name in names:
+        value = os.getenv(name, "").strip()
+        if value:
+            return value
+    return ""
+
+
+def _env_api_base(provider: str) -> str:
+    """按 provider 从环境变量读取 API Base，读不到则用 provider 默认端点"""
+    names = list(_GENERIC_BASE_ENVS)
+    if provider in _PROVIDER_ENV:
+        names.insert(0, _PROVIDER_ENV[provider][1])
+    for name in names:
+        value = os.getenv(name, "").strip()
+        if value:
+            return value
+    return _PROVIDER_DEFAULT_BASE.get(provider, "https://api.deepseek.com")
+
+
+def _fill_credentials(cfg: Dict[str, Any]) -> Dict[str, Any]:
+    """api_key / api_base 留空时，统一回退到环境变量
+
+    配置 JSON 里这两个字段通常为空字符串，仅靠 setdefault 是填不进去的，
+    必须显式判空后从环境变量取，否则密钥永远读不到。
+    """
+    cfg = dict(cfg)
+    provider = str(cfg.get("provider") or "deepseek").strip().lower()
+    if not str(cfg.get("api_key") or "").strip():
+        cfg["api_key"] = _env_api_key(provider)
+    if not str(cfg.get("api_base") or "").strip():
+        cfg["api_base"] = _env_api_base(provider)
+    return cfg
 
 
 def _get_default_config_path() -> str:
@@ -113,16 +173,13 @@ def load_llms_config(
     human_seats = set(human_seats or [])
 
     if not os.path.exists(config_path):
-        env = _get_env_defaults()
         return {
-            "default": {
+            "default": _fill_credentials({
                 "provider": "dashscope",
                 "model": "qwen-plus",
                 "temperature": 0.7,
                 "max_tokens": 2000,
-                "api_base": env["api_base"],
-                "api_key": env["api_key"],
-            },
+            }),
             "players": {},
         }
 
@@ -131,7 +188,6 @@ def load_llms_config(
 
     # 解析 default：可以是字符串或字典
     raw_default = data.get("default", {})
-    env = _get_env_defaults()
 
     if isinstance(raw_default, str):
         default_cfg = _load_model_json(raw_default)
@@ -140,9 +196,8 @@ def load_llms_config(
     else:
         default_cfg = {}
 
-    # .env 作为 api_key / api_base 的兜底
-    default_cfg.setdefault("api_key", env["api_key"])
-    default_cfg.setdefault("api_base", env["api_base"])
+    # 环境变量作为 api_key / api_base 的兜底
+    default_cfg = _fill_credentials(default_cfg)
     default_cfg.setdefault("provider", "dashscope")
     default_cfg.setdefault("model", "qwen-plus")
     default_cfg.setdefault("temperature", 0.7)
@@ -158,7 +213,10 @@ def load_llms_config(
             # 人类座位：标记为 human，不需要 LLM 配置
             resolved_players[seat_key] = {"is_human": True}
         else:
-            resolved_players[seat_key] = _resolve_seat_config(seat_value, default_cfg)
+            # 模型 JSON 里的空 api_key 会覆盖 default，合并后仍需回填环境变量
+            resolved_players[seat_key] = _fill_credentials(
+                _resolve_seat_config(seat_value, default_cfg)
+            )
 
     return {
         "default": default_cfg,
@@ -189,6 +247,8 @@ def get_player_llm_config(seat: int, config_data: Optional[Dict[str, Any]] = Non
     # 人类座位不需要 LLM 配置，返回空默认值
     if merged.get("is_human"):
         return PlayerLLMConfig()
+
+    merged = _fill_credentials(merged)
 
     return PlayerLLMConfig(
         provider=merged.get("provider", "dashscope"),
