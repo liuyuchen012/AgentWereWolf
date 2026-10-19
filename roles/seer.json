@@ -1,0 +1,217 @@
+{
+  "role_id": "seer",
+  "name": {
+    "zh": "预言家",
+    "en": "Seer"
+  },
+  "alignment": "village",
+  "description": {
+    "zh": "预言家是好人阵营最重要的神职，每晚可以查验一名玩家的身份（狼人或好人）。预言家需要通过查验信息引导好人阵营找出狼人，但也是狼人的首要击杀目标。跳出身份时需要建立警徽流（接下来要查验的玩家顺序），即使被杀也能通过遗言传递信息。\n\n常用策略包括：第一晚查验发言积极或位置靠前的玩家；查到狼人后及时跳出报告信息；建立清晰的警徽流；优先查验可能竞选警长的玩家；不仅报告狼人也报告查验的好人建立信任；使用反向查验通过排除法缩小狼坑；根据场上局势灵活调整查验目标；对抗悍跳狼时用严密逻辑证明自己。",
+    "en": "The Seer is the most important special role, able to verify one player's identity (werewolf or villager) each night. The Seer guides the village using verification info but is the werewolves' primary kill target. When revealing, must establish badge flow (next verification order) to pass info through last words even if killed.\n\nCommon strategies include: night one verification of active speakers or early position players; timely revealing after finding a werewolf; establishing clear badge flow; prioritizing verification of potential Sheriff candidates; reporting both werewolves and verified villagers to build trust; using reverse verification to narrow wolf positions by elimination; flexibly adjusting verification targets based on game state; proving yourself with tight logic when countering fake Seers."
+  },
+  "abilities": {
+    "night": {
+      "zh": "查验一名玩家的身份，得知其是狼人还是好人",
+      "en": "Verify one player's identity, learning if they are werewolf or villager"
+    },
+    "day": {
+      "zh": "可以选择跳出身份报查验信息，或隐藏身份观察局势",
+      "en": "Can choose to reveal identity and report verification info, or hide and observe"
+    },
+    "passive": {
+      "zh": "无被动技能",
+      "en": "No passive abilities"
+    }
+  },
+  "win_condition": {
+    "zh": "所有狼人被投票出局",
+    "en": "All werewolves are eliminated through voting"
+  },
+  "strategies": {
+    "basic": [
+      {
+        "zh": "第一晚查验策略：可以查验发言积极的玩家或随机查验",
+        "en": "Night one verification: Check active speakers or random players"
+      },
+      {
+        "zh": "及时跳出：查到狼人后应该跳出身份，报告查验信息",
+        "en": "Reveal timely: Jump out after finding a werewolf to report verification"
+      },
+      {
+        "zh": "建立警徽流：报告接下来要查验的玩家顺序，即使死亡也能传递信息",
+        "en": "Establish badge flow: Report next verification order, pass info even if killed"
+      },
+      {
+        "zh": "对抗悍跳狼：如果有狼人假跳预言家，要用逻辑和查验信息证明自己",
+        "en": "Counter fake Seer: Use logic and verification info to prove yourself against fake claims"
+      }
+    ],
+    "advanced": [
+      {
+        "zh": "首夜查验优先级：查验发言位置靠前的玩家，或可能竞选警长的玩家",
+        "en": "Night one priority: Check early speakers or potential Sheriff candidates"
+      },
+      {
+        "zh": "隐藏策略：第一天不跳，继续查验积累信息，第二天再跳出",
+        "en": "Hiding strategy: Don't reveal day one, accumulate info, reveal day two"
+      },
+      {
+        "zh": "警徽流设计：优先查验可疑玩家，避免查验明显的好人",
+        "en": "Badge flow design: Prioritize suspicious players, avoid obvious villagers"
+      },
+      {
+        "zh": "利用查验信息：不仅报告狼人，也要报告查验的好人建立信任",
+        "en": "Use verification info: Report not just werewolves, but also verified villagers for trust"
+      },
+      {
+        "zh": "应对悍跳：分析对方查验信息的合理性，找出逻辑漏洞",
+        "en": "Handle fake claims: Analyze opponent's verification logic, find flaws"
+      }
+    ],
+    "expert": [
+      {
+        "zh": "警上起跳：竞选警长并跳预言家，获得警徽增加话语权和保护",
+        "en": "Sheriff reveal: Run for Sheriff and reveal as Seer, gain badge for influence and protection"
+      },
+      {
+        "zh": "反向查验：故意查验不太可能是狼的玩家，用排除法缩小狼坑",
+        "en": "Reverse verification: Check unlikely wolves, narrow wolf positions by elimination"
+      },
+      {
+        "zh": "假报查验：在特殊情况下故意报假信息，测试场上反应",
+        "en": "False reporting: Intentionally report false info in special cases to test reactions"
+      },
+      {
+        "zh": "遗言警徽流：被投出局或被刀时，留下完整的警徽流和分析",
+        "en": "Last words badge flow: When eliminated or killed, leave complete badge flow and analysis"
+      },
+      {
+        "zh": "查验节奏：根据场上局势调整查验目标，不要机械执行警徽流",
+        "en": "Verification rhythm: Adjust targets based on game state, don't mechanically follow badge flow"
+      },
+      {
+        "zh": "身份保护：如果守卫还活着，暗示守卫保护自己",
+        "en": "Identity protection: If Guard is alive, hint for protection"
+      }
+    ]
+  },
+  "verification_priority": [
+    {
+      "target": "发言靠前的玩家",
+      "priority": "high",
+      "reason": {
+        "zh": "第一天信息少，靠前玩家可能是狼人试探",
+        "en": "Day one has little info, early speakers may be werewolves testing"
+      }
+    },
+    {
+      "target": "竞选警长的玩家",
+      "priority": "high",
+      "reason": {
+        "zh": "狼人可能悍跳警长获取话语权",
+        "en": "Werewolves may fake claim Sheriff for influence"
+      }
+    },
+    {
+      "target": "发言模糊的玩家",
+      "priority": "medium",
+      "reason": {
+        "zh": "发言模糊可能是狼人隐藏身份",
+        "en": "Vague speech may indicate werewolf hiding identity"
+      }
+    },
+    {
+      "target": "被多人怀疑的玩家",
+      "priority": "medium",
+      "reason": {
+        "zh": "验证身份可以确认或排除怀疑",
+        "en": "Verification can confirm or eliminate suspicion"
+      }
+    },
+    {
+      "target": "发言强势的玩家",
+      "priority": "low",
+      "reason": {
+        "zh": "可能是狼人带节奏，也可能是强势村民",
+        "en": "May be werewolf leading rhythm or strong villager"
+      }
+    }
+  ],
+  "badge_flow_examples": [
+    {
+      "scenario": "标准警徽流",
+      "flow": "3号 → 7号 → 10号",
+      "explanation": {
+        "zh": "按照怀疑程度从高到低排列查验顺序",
+        "en": "Arrange verification order from most to least suspicious"
+      }
+    },
+    {
+      "scenario": "对冲警徽流",
+      "flow": "5号 → 8号（如果5号是狼则8号是好人）",
+      "explanation": {
+        "zh": "两个玩家互相指认，查验其中一个可以确定两人身份",
+        "en": "Two players accuse each other, checking one determines both identities"
+      }
+    },
+    {
+      "scenario": "排除法警徽流",
+      "flow": "1号 → 2号 → 4号（排除好人缩小狼坑）",
+      "explanation": {
+        "zh": "查验可能是好人的玩家，用排除法找狼",
+        "en": "Check likely villagers, find wolves by elimination"
+      }
+    }
+  ],
+  "common_mistakes": [
+    {
+      "zh": "过早跳出身份，没有足够信息支撑",
+      "en": "Revealing too early without enough supporting information"
+    },
+    {
+      "zh": "查验目标过于随机，没有策略性",
+      "en": "Verification targets too random, lacking strategy"
+    },
+    {
+      "zh": "不建立警徽流，死后无法传递信息",
+      "en": "Not establishing badge flow, unable to pass info after death"
+    },
+    {
+      "zh": "与悍跳狼对跳时情绪化，失去理性",
+      "en": "Getting emotional when countering fake Seer, losing rationality"
+    },
+    {
+      "zh": "只报狼人不报好人，缺乏可信度",
+      "en": "Only reporting werewolves not villagers, lacking credibility"
+    }
+  ],
+  "tips": [
+    {
+      "zh": "第一晚盲验：没有信息时可以随机查验，或查验特定位置（如3号、7号）",
+      "en": "Night one blind check: Random verification or specific positions (like 3, 7) when no info"
+    },
+    {
+      "zh": "警徽的重要性：竞选警长可以获得1.5票权重和遗言机会",
+      "en": "Badge importance: Running for Sheriff gives 1.5 vote weight and last words opportunity"
+    },
+    {
+      "zh": "真预言家通常逻辑严密，查验信息前后一致",
+      "en": "True Seer usually has tight logic and consistent verification info"
+    },
+    {
+      "zh": "如果被狼人刀杀，女巫可能会救你，第二天继续报查验",
+      "en": "If killed by werewolves, Witch may save you, continue reporting next day"
+    },
+    {
+      "zh": "预言家是狼队的首要目标，要时刻警惕",
+      "en": "Seer is wolf team's primary target, stay vigilant"
+    }
+  ],
+  "difficulty_rating": {
+    "beginner": "hard",
+    "intermediate": "medium",
+    "expert": "easy"
+  },
+  "role_priority": "highest",
+  "typical_survival_time": "early-mid"
+}

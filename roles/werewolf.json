@@ -1,0 +1,199 @@
+{
+  "role_id": "werewolf",
+  "name": {
+    "zh": "狼人",
+    "en": "Werewolf"
+  },
+  "alignment": "wolf",
+  "description": {
+    "zh": "狼人是狼人阵营的核心角色，每晚可以与队友商议并投票杀死一名玩家。狼人需要隐藏身份，伪装成好人，并通过各种策略误导村民。狼人天生知道所有队友的身份，胜利条件是狼人数量达到或超过好人数量。\n\n常用策略包括：优先击杀预言家、女巫、守卫等神职；发言时模仿好人思维避免暴露狼人视角；与队友配合但避免投票过于一致；悍跳预言家给出假查验信息误导好人；深水狼策略隐藏在村民中暗中帮助狼队；被怀疑时倒打一耙反咬怀疑者；警上悍跳获得警徽增加话语权；屠边战术集中刀一侧玩家制造信息不对称；自刀策略配合女巫解药或守卫守护。",
+    "en": "Werewolves are the core wolf team role, voting each night with teammates to kill one player. Werewolves must hide their identity, pretend to be villagers, and mislead the village through various strategies. Werewolves inherently know all teammates' identities, with victory when werewolf count equals or exceeds villager count.\n\nCommon strategies include: prioritizing kills on special roles like Seer, Witch, Guard; mimicking villager thinking in speeches to avoid revealing wolf perspective; coordinating with teammates while avoiding uniform voting; fake claiming as Seer to give false verification info; deep wolf strategy hiding among villagers to secretly help wolf team; counter-accusing when suspected; Sheriff fake claim to gain badge for influence; side slaughter tactics focusing kills on one side to create information asymmetry; self-kill strategy coordinating with Witch heal or Guard protection."
+  },
+  "abilities": {
+    "night": {
+      "zh": "与其他狼人队友投票选择击杀目标（多数票决定）",
+      "en": "Vote with wolf teammates to choose a kill target (majority vote)"
+    },
+    "day": {
+      "zh": "参与发言和投票，可以选择悍跳神职或隐藏身份",
+      "en": "Participate in speeches and voting, can fake claim special roles or hide identity"
+    },
+    "passive": {
+      "zh": "知道所有狼人队友的身份",
+      "en": "Know the identity of all wolf teammates"
+    }
+  },
+  "win_condition": {
+    "zh": "狼人数量 ≥ 好人数量（任何时刻达成即获胜）",
+    "en": "Werewolf count ≥ Village count (win immediately when achieved)"
+  },
+  "strategies": {
+    "basic": [
+      {
+        "zh": "第一晚优先刀神职：预言家、女巫、守卫是最大威胁",
+        "en": "Night one priority: Kill special roles - Seer, Witch, Guard are biggest threats"
+      },
+      {
+        "zh": "隐藏身份：发言时模仿好人的思维方式，避免暴露狼人视角",
+        "en": "Hide identity: Mimic villager thinking in speeches, avoid revealing wolf perspective"
+      },
+      {
+        "zh": "与队友配合：投票时不要过于一致，避免被识破狼队",
+        "en": "Coordinate with teammates: Don't vote too uniformly to avoid being identified as a team"
+      },
+      {
+        "zh": "制造混乱：质疑真神职的发言，支持假神职，误导好人",
+        "en": "Create chaos: Question true special roles, support fake ones, mislead villagers"
+      }
+    ],
+    "advanced": [
+      {
+        "zh": "悍跳预言家：假装自己是预言家，给出假查验信息误导好人",
+        "en": "Fake Seer claim: Pretend to be Seer, give false verification info to mislead"
+      },
+      {
+        "zh": "深水狼策略：不悍跳，隐藏在村民中，通过投票和发言暗中帮助狼队",
+        "en": "Deep wolf strategy: Don't fake claim, hide among villagers, help wolf team subtly"
+      },
+      {
+        "zh": "刀边缘人：避免刀明显的好人，选择发言模糊的玩家减少信息暴露",
+        "en": "Kill marginal players: Avoid obvious villagers, choose ambiguous speakers to reduce info"
+      },
+      {
+        "zh": "倒打一耙：被怀疑时反咬怀疑者，声称对方是狼人",
+        "en": "Counter-accuse: When suspected, accuse your accuser of being a werewolf"
+      },
+      {
+        "zh": "保护队友：当队友被怀疑时，适度为其辩护但不要过于明显",
+        "en": "Protect teammates: Defend teammates when suspected, but not too obviously"
+      }
+    ],
+    "expert": [
+      {
+        "zh": "警上悍跳：竞选警长并悍跳预言家，获得警徽增加话语权",
+        "en": "Sheriff fake claim: Run for Sheriff and fake Seer, gain badge for more influence"
+      },
+      {
+        "zh": "屠边策略：集中刀一侧玩家，制造信息不对称",
+        "en": "Side slaughter: Focus kills on one side of seating to create information asymmetry"
+      },
+      {
+        "zh": "养狼战术：故意留下被怀疑的队友吸引火力，保护深水狼",
+        "en": "Wolf farming: Intentionally leave suspected teammates to draw fire, protect deep wolves"
+      },
+      {
+        "zh": "自刀策略：刀自己制造假象，配合女巫解药或守卫守护",
+        "en": "Self-kill strategy: Kill yourself to create illusion, coordinate with Witch heal or Guard"
+      },
+      {
+        "zh": "节奏控制：在关键轮次带节奏，引导好人投错人",
+        "en": "Rhythm control: Lead discussion in key rounds to guide villagers to vote wrong"
+      },
+      {
+        "zh": "身份置换：悍跳后适时退水，让队友接盘或制造混乱",
+        "en": "Identity swap: Retreat from fake claim at right time, let teammate take over or create chaos"
+      }
+    ]
+  },
+  "kill_priority": [
+    {
+      "target": "预言家 (Seer)",
+      "priority": "highest",
+      "reason": {
+        "zh": "预言家每晚可以查验身份，是狼队最大威胁",
+        "en": "Seer can verify identities nightly, biggest threat to wolf team"
+      }
+    },
+    {
+      "target": "女巫 (Witch)",
+      "priority": "high",
+      "reason": {
+        "zh": "女巫有解药和毒药，可以救人和杀狼",
+        "en": "Witch has heal and poison, can save and kill"
+      }
+    },
+    {
+      "target": "守卫 (Guard)",
+      "priority": "high",
+      "reason": {
+        "zh": "守卫可以保护关键角色，阻止狼人击杀",
+        "en": "Guard can protect key roles, blocking werewolf kills"
+      }
+    },
+    {
+      "target": "猎人 (Hunter)",
+      "priority": "medium",
+      "reason": {
+        "zh": "猎人死后可以开枪带走一人，需谨慎处理",
+        "en": "Hunter can shoot when dying, handle with caution"
+      }
+    },
+    {
+      "target": "警长 (Sheriff)",
+      "priority": "medium",
+      "reason": {
+        "zh": "警长有1.5票权重，影响投票结果",
+        "en": "Sheriff has 1.5 vote weight, influences voting outcomes"
+      }
+    },
+    {
+      "target": "强势村民",
+      "priority": "low",
+      "reason": {
+        "zh": "逻辑清晰、带节奏能力强的村民需要优先清除",
+        "en": "Villagers with clear logic and strong leadership should be prioritized"
+      }
+    }
+  ],
+  "common_mistakes": [
+    {
+      "zh": "悍跳时逻辑不自洽，查验信息前后矛盾",
+      "en": "Inconsistent logic when fake claiming, contradictory verification info"
+    },
+    {
+      "zh": "过度保护队友，暴露狼队关系",
+      "en": "Over-protecting teammates, exposing wolf team relationships"
+    },
+    {
+      "zh": "投票过于一致，被识破是狼队",
+      "en": "Voting too uniformly, being identified as wolf team"
+    },
+    {
+      "zh": "发言时暴露狼人视角（如知道不该知道的信息）",
+      "en": "Revealing wolf perspective in speech (knowing info they shouldn't)"
+    },
+    {
+      "zh": "刀人目标过于明显，被预测到刀法",
+      "en": "Kill targets too obvious, kill pattern predicted"
+    }
+  ],
+  "tips": [
+    {
+      "zh": "第一晚可以盲刀，或根据座位选择可能的神职位置",
+      "en": "Night one can blind kill, or choose likely special role positions by seating"
+    },
+    {
+      "zh": "悍跳预言家时，准备好完整的查验逻辑和警徽流",
+      "en": "When fake claiming Seer, prepare complete verification logic and badge flow"
+    },
+    {
+      "zh": "深水狼要保持低调，不要过度表现",
+      "en": "Deep wolves should stay low-key, don't overperform"
+    },
+    {
+      "zh": "注意刀口：连续刀同一类型玩家会暴露狼队策略",
+      "en": "Watch kill patterns: Consecutive kills of same type reveals wolf strategy"
+    },
+    {
+      "zh": "狼队需要至少一人悍跳，否则真预言家会主导局势",
+      "en": "Wolf team needs at least one fake claim, or true Seer will dominate"
+    }
+  ],
+  "difficulty_rating": {
+    "beginner": "hard",
+    "intermediate": "medium",
+    "expert": "medium"
+  },
+  "role_priority": "highest",
+  "typical_survival_time": "varies"
+}

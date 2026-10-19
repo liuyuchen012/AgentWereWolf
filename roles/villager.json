@@ -1,0 +1,133 @@
+{
+  "role_id": "villager",
+  "name": {
+    "zh": "村民",
+    "en": "Villager"
+  },
+  "alignment": "village",
+  "description": {
+    "zh": "普通村民是好人阵营的基础角色，没有特殊能力，只能通过白天的发言和投票来帮助好人阵营找出狼人。村民需要仔细聆听每个玩家的发言，寻找逻辑漏洞和矛盾之处，观察投票行为分析玩家关系，相信并配合神职角色的信息。\n\n常用策略包括：积极发言表明立场但避免过度表现；学会站边，根据预言家的查验信息选择相信真预言家；记录关键信息如每晚死亡情况、查验结果和投票记录；识别悍跳狼的逻辑漏洞；深水策略故意低调发言避免成为刀目标；倒推狼坑计算狼人可能的位置组合；在关键轮次带领好人阵营统一投票。",
+    "en": "Villagers are the basic role with no special abilities, relying only on daytime speeches and voting to help identify werewolves. Villagers must carefully listen to speeches, look for logical flaws and contradictions, observe voting behavior to analyze relationships, and trust and coordinate with special role information.\n\nCommon strategies include: speaking actively to show position while avoiding overacting; learning to take sides by choosing to believe the true Seer based on verification info; recording key information like nightly deaths, verification results, and voting records; identifying logical flaws in fake Seers; using deep water strategy by speaking low-key to avoid becoming kill targets; reverse deducing wolf positions by calculating possible combinations; leading the village team to unified voting in critical rounds."
+  },
+  "abilities": {
+    "night": {
+      "zh": "无夜间行动",
+      "en": "No night action"
+    },
+    "day": {
+      "zh": "参与发言和投票",
+      "en": "Participate in speeches and voting"
+    },
+    "passive": {
+      "zh": "无被动技能",
+      "en": "No passive abilities"
+    }
+  },
+  "win_condition": {
+    "zh": "所有狼人被投票出局",
+    "en": "All werewolves are eliminated through voting"
+  },
+  "strategies": {
+    "basic": [
+      {
+        "zh": "仔细聆听每个玩家的发言，寻找逻辑漏洞和矛盾之处",
+        "en": "Listen carefully to each player's speech, looking for logical flaws and contradictions"
+      },
+      {
+        "zh": "观察玩家的投票行为，分析投票模式找出狼人",
+        "en": "Observe voting behavior and analyze patterns to identify werewolves"
+      },
+      {
+        "zh": "积极发言表明立场，但避免过度表现引起怀疑",
+        "en": "Speak actively to show your position, but avoid overacting to prevent suspicion"
+      },
+      {
+        "zh": "相信神职（预言家、女巫、守卫）的信息，协助他们推理",
+        "en": "Trust information from special roles (Seer, Witch, Guard) and assist their reasoning"
+      }
+    ],
+    "advanced": [
+      {
+        "zh": "学会站边：根据预言家的查验信息和逻辑，选择相信真预言家",
+        "en": "Learn to take sides: Choose to believe the true Seer based on verification info and logic"
+      },
+      {
+        "zh": "记录关键信息：记住每晚的死亡情况、预言家查验结果、投票记录",
+        "en": "Record key information: Remember nightly deaths, Seer results, and voting records"
+      },
+      {
+        "zh": "分析发言顺序：后置位玩家可能根据前面发言调整策略",
+        "en": "Analyze speech order: Later speakers may adjust strategy based on earlier speeches"
+      },
+      {
+        "zh": "识别悍跳狼：假预言家通常逻辑不严密，查验信息可能与事实矛盾",
+        "en": "Identify fake Seers: False Seers usually have weak logic and contradictory information"
+      },
+      {
+        "zh": "保护神职：如果确认某人是真神职，投票时避免让其出局",
+        "en": "Protect special roles: If someone is confirmed as a true special role, avoid voting them out"
+      }
+    ],
+    "expert": [
+      {
+        "zh": "深水策略：故意低调发言，让狼人忽视你，避免成为刀目标",
+        "en": "Deep water strategy: Deliberately speak low-key to make werewolves ignore you"
+      },
+      {
+        "zh": "倒推狼坑：根据场上局势，推算狼人可能的位置组合",
+        "en": "Reverse deduce wolf positions: Calculate possible werewolf position combinations"
+      },
+      {
+        "zh": "利用警徽流：理解预言家的警徽流（遗言查验顺序）来获取信息",
+        "en": "Use badge flow: Understand Seer's badge flow (verification order in last words)"
+      },
+      {
+        "zh": "识别狼队配合：观察哪些玩家互相保护、投票一致，可能是狼队",
+        "en": "Identify wolf team coordination: Observe mutual protection and voting alignment"
+      },
+      {
+        "zh": "关键轮次归票：在平票或关键局面时，带领好人阵营统一投票",
+        "en": "Critical round vote leading: Lead village team to unified voting in ties or key moments"
+      }
+    ]
+  },
+  "common_mistakes": [
+    {
+      "zh": "盲目跟风投票，不做独立思考",
+      "en": "Blindly following votes without independent thinking"
+    },
+    {
+      "zh": "过早暴露自己的身份倾向，成为狼人目标",
+      "en": "Exposing your position too early, becoming a werewolf target"
+    },
+    {
+      "zh": "忽视细节信息，错过关键线索",
+      "en": "Ignoring details and missing key clues"
+    },
+    {
+      "zh": "情绪化发言，失去理性判断",
+      "en": "Emotional speeches, losing rational judgment"
+    }
+  ],
+  "tips": [
+    {
+      "zh": "第一天没有太多信息，可以观察谁发言最积极或最消极",
+      "en": "On day one with limited info, observe who speaks most actively or passively"
+    },
+    {
+      "zh": "如果场上有警长，警长的意见通常值得参考",
+      "en": "If there's a Sheriff, their opinion is usually worth considering"
+    },
+    {
+      "zh": "村民数量最多，是好人阵营的基石，团结一致很重要",
+      "en": "Villagers are the most numerous and the foundation of the village team - unity is key"
+    }
+  ],
+  "difficulty_rating": {
+    "beginner": "medium",
+    "intermediate": "easy",
+    "expert": "medium"
+  },
+  "role_priority": "low",
+  "typical_survival_time": "mid-game"
+}

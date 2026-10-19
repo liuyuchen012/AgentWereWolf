@@ -1,0 +1,9 @@
+{
+    "provider": "zenmux",
+    "model": "google/gemini-2.5-flash-lite",
+    "api_base": "",
+    "api_key": "",
+    "temperature": 0.6,
+    "max_tokens": 1500,
+    "description": "Google Gemini 2.5 Flash Lite (via ZenMux)"
+}

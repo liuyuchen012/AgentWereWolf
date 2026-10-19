@@ -1,0 +1,267 @@
+{
+  "role_id": "hunter",
+  "name": {
+    "zh": "猎人",
+    "en": "Hunter"
+  },
+  "alignment": "village",
+  "description": {
+    "zh": "猎人是好人阵营的威慑性神职，当被投票出局或被狼人杀死时，可以开枪带走一名玩家。但如果被女巫毒死，则不能开枪。猎人的存在让狼人在选择击杀目标时更加谨慎，活着的猎人往往比死去的猎人更有价值。\n\n常用策略包括：不过早暴露猎人身份保持威慑作用；开枪时优先选择确认的狼人或悍跳狼；根据预言家的查验信息选择目标；在被强烈怀疑时适时跳出自保；分析场上局势选择对好人最有利的目标；在关键时刻可以故意被投票然后带走关键狼人。",
+    "en": "The Hunter is a deterrent special role who can shoot one player when voted out or killed by werewolves. However, cannot shoot if poisoned by the Witch. The Hunter's presence makes werewolves cautious when choosing targets - a living Hunter is often more valuable than a dead one.\n\nCommon strategies include: not revealing Hunter identity too early to maintain deterrence; prioritizing confirmed werewolves or fake Seers when shooting; choosing targets based on Seer verification info; timely revealing for self-protection when strongly suspected; analyzing game state to choose the most beneficial target for the village; deliberately getting voted out at key moments to shoot key werewolves."
+  },
+  "abilities": {
+    "night": {
+      "zh": "无夜间行动",
+      "en": "No night action"
+    },
+    "day": {
+      "zh": "参与发言和投票",
+      "en": "Participate in speeches and voting"
+    },
+    "passive": {
+      "zh": "被投票出局或被狼人杀死时，可以开枪带走一名玩家（被女巫毒死除外）",
+      "en": "When voted out or killed by werewolves, can shoot one player (except if poisoned by Witch)"
+    }
+  },
+  "win_condition": {
+    "zh": "所有狼人被投票出局",
+    "en": "All werewolves are eliminated through voting"
+  },
+  "strategies": {
+    "basic": [
+      {
+        "zh": "隐藏身份：不要过早暴露猎人身份，让狼人不敢轻易刀你",
+        "en": "Hide identity: Don't reveal Hunter identity too early, make werewolves hesitant to kill you"
+      },
+      {
+        "zh": "威慑作用：猎人的存在本身就是威慑，活着比死了更有价值",
+        "en": "Deterrent effect: Hunter's existence itself is deterrent, alive is more valuable than dead"
+      },
+      {
+        "zh": "开枪目标：优先射击确认的狼人或悍跳狼",
+        "en": "Shooting target: Prioritize confirmed werewolves or fake Seers"
+      },
+      {
+        "zh": "配合预言家：根据预言家的查验信息选择开枪目标",
+        "en": "Coordinate with Seer: Choose shooting target based on Seer's verification info"
+      }
+    ],
+    "advanced": [
+      {
+        "zh": "适时跳猎人：在被怀疑时跳出猎人身份自保",
+        "en": "Timely reveal: Reveal Hunter identity when suspected for self-protection"
+      },
+      {
+        "zh": "假跳策略：有时可以假装其他身份，隐藏猎人身份",
+        "en": "Fake claim: Sometimes pretend to be other roles, hide Hunter identity"
+      },
+      {
+        "zh": "带人技巧：开枪前分析场上局势，选择对好人阵营最有利的目标",
+        "en": "Shooting skill: Analyze game state before shooting, choose most beneficial target for village"
+      },
+      {
+        "zh": "警惕女巫：避免被女巫误毒，因为被毒后不能开枪",
+        "en": "Beware Witch: Avoid being poisoned by Witch, as cannot shoot if poisoned"
+      },
+      {
+        "zh": "配合投票：如果确定某人是狼，可以主动让自己被投出局然后带走狼人",
+        "en": "Coordinate voting: If certain someone is wolf, can let yourself be voted out then shoot wolf"
+      }
+    ],
+    "expert": [
+      {
+        "zh": "警上跳猎人：竞选警长时跳猎人，获得话语权和保护",
+        "en": "Sheriff reveal: Reveal as Hunter when running for Sheriff, gain influence and protection"
+      },
+      {
+        "zh": "反向操作：在关键时刻故意被投票，然后开枪带走关键狼人",
+        "en": "Reverse operation: Deliberately get voted out at key moment, then shoot key werewolf"
+      },
+      {
+        "zh": "心理博弈：跳猎人后观察谁最想投你出局，可能是狼人",
+        "en": "Psychological game: After revealing, observe who most wants to vote you out, may be werewolf"
+      },
+      {
+        "zh": "假装被刀：如果被女巫救活，可以假装自己是被刀的猎人",
+        "en": "Pretend killed: If saved by Witch, can pretend to be killed Hunter"
+      },
+      {
+        "zh": "遗言分析：被投出局时，遗言中详细分析场上局势，帮助好人阵营",
+        "en": "Last words analysis: When voted out, detailed analysis in last words to help village team"
+      },
+      {
+        "zh": "双重威慑：与女巫配合，形成双重威慑让狼人不敢轻举妄动",
+        "en": "Double deterrent: Coordinate with Witch, form double deterrent to make werewolves cautious"
+      }
+    ]
+  },
+  "shooting_priority": [
+    {
+      "target": "确认的狼人",
+      "priority": "highest",
+      "reason": {
+        "zh": "预言家查验出的狼人，或发言暴露的狼人",
+        "en": "Werewolf verified by Seer or exposed through speech"
+      }
+    },
+    {
+      "target": "悍跳预言家的狼人",
+      "priority": "high",
+      "reason": {
+        "zh": "假预言家对好人阵营危害极大",
+        "en": "Fake Seer causes great harm to village team"
+      }
+    },
+    {
+      "target": "强势狼人",
+      "priority": "high",
+      "reason": {
+        "zh": "带节奏能力强、话语权大的狼人",
+        "en": "Werewolf with strong leadership and influence"
+      }
+    },
+    {
+      "target": "可疑玩家",
+      "priority": "medium",
+      "reason": {
+        "zh": "发言可疑但未确认身份的玩家",
+        "en": "Suspicious speaker but unconfirmed identity"
+      }
+    },
+    {
+      "target": "边缘玩家",
+      "priority": "low",
+      "reason": {
+        "zh": "存在感低的玩家，可能是深水狼",
+        "en": "Low presence player, may be deep wolf"
+      }
+    }
+  ],
+  "when_to_reveal": [
+    {
+      "scenario": "被强烈怀疑即将被投出局",
+      "action": {
+        "zh": "跳出猎人身份自保，让好人重新考虑",
+        "en": "Reveal Hunter identity for self-protection, make villagers reconsider"
+      }
+    },
+    {
+      "scenario": "场上局势混乱，需要建立信任",
+      "action": {
+        "zh": "跳出猎人身份，稳定局势",
+        "en": "Reveal Hunter identity to stabilize situation"
+      }
+    },
+    {
+      "scenario": "预言家被投出局，需要支持",
+      "action": {
+        "zh": "跳出猎人身份，证明预言家是真的",
+        "en": "Reveal Hunter identity to prove Seer is real"
+      }
+    },
+    {
+      "scenario": "狼人悍跳猎人",
+      "action": {
+        "zh": "立即跳出真猎人身份对抗",
+        "en": "Immediately reveal as true Hunter to counter"
+      }
+    }
+  ],
+  "common_mistakes": [
+    {
+      "zh": "过早跳猎人，失去威慑作用",
+      "en": "Revealing Hunter too early, losing deterrent effect"
+    },
+    {
+      "zh": "开枪目标选择失误，带走好人",
+      "en": "Wrong shooting target choice, taking out villager"
+    },
+    {
+      "zh": "被女巫毒死，浪费开枪机会",
+      "en": "Being poisoned by Witch, wasting shooting opportunity"
+    },
+    {
+      "zh": "不敢跳猎人自保，被冤枉投出局",
+      "en": "Not daring to reveal Hunter for self-protection, wrongly voted out"
+    },
+    {
+      "zh": "开枪前不分析局势，盲目开枪",
+      "en": "Not analyzing situation before shooting, blindly shooting"
+    }
+  ],
+  "tips": [
+    {
+      "zh": "猎人是狼人最不想刀的角色，因为会被带走一个",
+      "en": "Hunter is the role werewolves least want to kill, as they'll take one with them"
+    },
+    {
+      "zh": "如果被女巫毒死，不能开枪（特殊规则）",
+      "en": "If poisoned by Witch, cannot shoot (special rule)"
+    },
+    {
+      "zh": "猎人可以在遗言中详细分析，帮助好人阵营",
+      "en": "Hunter can provide detailed analysis in last words to help village team"
+    },
+    {
+      "zh": "开枪是猎人唯一的技能，要慎重选择目标",
+      "en": "Shooting is Hunter's only ability, choose target carefully"
+    },
+    {
+      "zh": "猎人的威慑作用：活着的猎人让狼人不敢轻易刀神职",
+      "en": "Hunter's deterrent: Alive Hunter makes werewolves hesitant to kill special roles"
+    },
+    {
+      "zh": "如果场上有多个猎人跳出，至少有一个是假的",
+      "en": "If multiple Hunters reveal, at least one is fake"
+    }
+  ],
+  "special_scenarios": [
+    {
+      "scenario": "被狼人刀死",
+      "can_shoot": true,
+      "note": {
+        "zh": "可以开枪带走一人",
+        "en": "Can shoot and take one player"
+      }
+    },
+    {
+      "scenario": "被投票出局",
+      "can_shoot": true,
+      "note": {
+        "zh": "可以开枪带走一人",
+        "en": "Can shoot and take one player"
+      }
+    },
+    {
+      "scenario": "被女巫毒死",
+      "can_shoot": false,
+      "note": {
+        "zh": "不能开枪（特殊规则）",
+        "en": "Cannot shoot (special rule)"
+      }
+    },
+    {
+      "scenario": "被守卫保护而存活",
+      "can_shoot": false,
+      "note": {
+        "zh": "没有死亡，不触发开枪",
+        "en": "Not dead, shooting not triggered"
+      }
+    },
+    {
+      "scenario": "被女巫救活",
+      "can_shoot": false,
+      "note": {
+        "zh": "被救活，不触发开枪",
+        "en": "Saved, shooting not triggered"
+      }
+    }
+  ],
+  "difficulty_rating": {
+    "beginner": "medium",
+    "intermediate": "easy",
+    "expert": "medium"
+  },
+  "role_priority": "medium",
+  "typical_survival_time": "late-game"
+}

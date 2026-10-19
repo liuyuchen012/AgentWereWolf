@@ -1,0 +1,266 @@
+{
+  "role_id": "witch",
+  "name": {
+    "zh": "女巫",
+    "en": "Witch"
+  },
+  "alignment": "village",
+  "description": {
+    "zh": "女巫是好人阵营的强力神职，拥有一瓶解药和一瓶毒药。解药可以救活当晚被狼人杀死的玩家，毒药可以毒死任意一名玩家。每瓶药只能使用一次，同一晚不能同时使用两瓶药。女巫每晚会得知被刀玩家的身份，需要决定是否使用药物。\n\n常用策略包括：第一晚根据被刀者重要性决定是否救人；确认狼人身份后再使用毒药避免误毒；隐藏身份避免成为狼人目标；可以跳出报银水（被救的玩家）建立信任；盲毒明显的悍跳狼；留毒等待更确定的目标。注意不要误毒猎人，否则猎人无法开枪。",
+    "en": "The Witch is a powerful special role with one heal and one poison potion. The heal saves the player killed by werewolves that night, while poison kills any player. Each potion is single-use, and both cannot be used the same night. The Witch learns who was killed each night and must decide whether to use potions.\n\nCommon strategies include: deciding whether to save based on killed player's importance on night one; using poison only after confirming werewolf identity to avoid mistakes; hiding identity to avoid becoming a target; revealing to report silver water (saved player) to build trust; blind poisoning obvious fake Seers; saving poison for more certain targets. Avoid poisoning the Hunter, as they cannot shoot if poisoned."
+  },
+  "abilities": {
+    "night": {
+      "zh": "得知当晚被狼人杀死的玩家，可以选择：1) 使用解药救人 2) 使用毒药毒人 3) 不使用药",
+      "en": "Learn who was killed by werewolves, can choose: 1) Use heal to save 2) Use poison to kill 3) Use no potion"
+    },
+    "day": {
+      "zh": "参与发言和投票，可以选择跳出身份或隐藏",
+      "en": "Participate in speeches and voting, can reveal identity or hide"
+    },
+    "passive": {
+      "zh": "解药和毒药各一瓶，每瓶只能使用一次",
+      "en": "One heal and one poison potion, each usable once"
+    }
+  },
+  "win_condition": {
+    "zh": "所有狼人被投票出局",
+    "en": "All werewolves are eliminated through voting"
+  },
+  "strategies": {
+    "basic": [
+      {
+        "zh": "第一晚解药策略：如果被刀的是神职或关键玩家，考虑使用解药",
+        "en": "Night one heal strategy: Consider using heal if killed player is special role or key player"
+      },
+      {
+        "zh": "毒药使用时机：确认狼人身份后再使用毒药，避免浪费",
+        "en": "Poison timing: Use poison after confirming werewolf identity, avoid waste"
+      },
+      {
+        "zh": "隐藏身份：不要过早暴露女巫身份，避免成为狼人目标",
+        "en": "Hide identity: Don't reveal Witch identity too early, avoid becoming werewolf target"
+      },
+      {
+        "zh": "配合预言家：根据预言家的查验信息决定毒药目标",
+        "en": "Coordinate with Seer: Decide poison target based on Seer's verification info"
+      }
+    ],
+    "advanced": [
+      {
+        "zh": "盲毒策略：第一晚如果有明显的狼人嫌疑（如悍跳预言家），可以盲毒",
+        "en": "Blind poison: Night one if there's obvious werewolf suspect (like fake Seer), can blind poison"
+      },
+      {
+        "zh": "留毒策略：不急于使用毒药，等待确认狼人身份后再毒",
+        "en": "Save poison: Don't rush to use poison, wait for confirmed werewolf identity"
+      },
+      {
+        "zh": "自救策略：如果自己被刀，可以使用解药自救（规则允许的情况下）",
+        "en": "Self-save: If killed, can use heal to save yourself (if rules allow)"
+      },
+      {
+        "zh": "解药心理战：第一晚不救人，让狼人以为女巫不在场或已用解药",
+        "en": "Heal psychology: Don't save night one, make werewolves think Witch is absent or used heal"
+      },
+      {
+        "zh": "报银水：如果救了某人，白天可以跳出报告救人信息（银水）",
+        "en": "Report silver water: If saved someone, can reveal and report save info (silver water)"
+      }
+    ],
+    "expert": [
+      {
+        "zh": "首夜盲毒悍跳狼：如果确信某人是悍跳狼，第一晚直接毒死",
+        "en": "Night one blind poison fake Seer: If certain someone is fake Seer, poison immediately"
+      },
+      {
+        "zh": "空城计：解药已用后，假装还有解药威慑狼人",
+        "en": "Empty city strategy: After using heal, pretend to still have it to deter werewolves"
+      },
+      {
+        "zh": "双开策略：在关键局面跳出身份，报告解药和毒药使用情况",
+        "en": "Double reveal: In key moments, reveal identity and report heal/poison usage"
+      },
+      {
+        "zh": "毒边缘人：如果局势不明朗，毒发言模糊、可能是狼的边缘玩家",
+        "en": "Poison marginal players: If situation unclear, poison vague speakers who may be wolves"
+      },
+      {
+        "zh": "配合守卫：如果知道守卫位置，可以协调保护策略",
+        "en": "Coordinate with Guard: If Guard position known, can coordinate protection strategy"
+      },
+      {
+        "zh": "遗言毒人：如果白天被投出局，遗言中暗示毒药目标给好人阵营",
+        "en": "Last words poison: If voted out during day, hint poison target in last words for village"
+      }
+    ]
+  },
+  "potion_usage_guide": {
+    "heal_potion": {
+      "when_to_use": [
+        {
+          "zh": "被刀的是确认的神职（预言家、猎人等）",
+          "en": "Killed player is confirmed special role (Seer, Hunter, etc.)"
+        },
+        {
+          "zh": "被刀的是强势好人或警长",
+          "en": "Killed player is strong villager or Sheriff"
+        },
+        {
+          "zh": "第一晚被刀的可能是预言家（狼人盲刀神职）",
+          "en": "Night one kill may be Seer (werewolves blind killing special roles)"
+        }
+      ],
+      "when_not_to_use": [
+        {
+          "zh": "被刀的是边缘玩家或可疑玩家",
+          "en": "Killed player is marginal or suspicious"
+        },
+        {
+          "zh": "想留解药保护自己或后续关键玩家",
+          "en": "Want to save heal for yourself or future key players"
+        },
+        {
+          "zh": "第一晚盲救，不确定被刀者身份",
+          "en": "Night one blind save, uncertain of killed player's identity"
+        }
+      ]
+    },
+    "poison_potion": {
+      "when_to_use": [
+        {
+          "zh": "预言家查验出狼人身份",
+          "en": "Seer verified werewolf identity"
+        },
+        {
+          "zh": "确认的悍跳狼（假预言家）",
+          "en": "Confirmed fake Seer (werewolf)"
+        },
+        {
+          "zh": "发言明显暴露狼人身份的玩家",
+          "en": "Player whose speech clearly reveals werewolf identity"
+        },
+        {
+          "zh": "关键轮次需要快速减少狼人数量",
+          "en": "Critical round needing to quickly reduce werewolf count"
+        }
+      ],
+      "when_not_to_use": [
+        {
+          "zh": "不确定目标身份，可能误毒好人",
+          "en": "Uncertain of target identity, may poison villager by mistake"
+        },
+        {
+          "zh": "想留毒药等待更确定的目标",
+          "en": "Want to save poison for more certain target"
+        },
+        {
+          "zh": "场上还有猎人，投票可以出狼",
+          "en": "Hunter still alive, can eliminate wolf through voting"
+        }
+      ]
+    }
+  },
+  "common_strategies": [
+    {
+      "name": "首夜盲毒",
+      "description": {
+        "zh": "第一晚根据发言或直觉盲毒可疑玩家，高风险高回报",
+        "en": "Night one blind poison suspicious player based on speech or intuition, high risk high reward"
+      },
+      "risk": "high",
+      "reward": "high"
+    },
+    {
+      "name": "首夜盲救",
+      "description": {
+        "zh": "第一晚直接救人，保护可能的神职",
+        "en": "Night one blind save to protect possible special roles"
+      },
+      "risk": "medium",
+      "reward": "medium"
+    },
+    {
+      "name": "首夜不开药",
+      "description": {
+        "zh": "第一晚不使用任何药，观察局势再决定",
+        "en": "Night one use no potion, observe situation before deciding"
+      },
+      "risk": "low",
+      "reward": "low"
+    },
+    {
+      "name": "银水战术",
+      "description": {
+        "zh": "救人后白天跳出报银水，建立信任圈",
+        "en": "After saving, reveal during day to report silver water, establish trust circle"
+      },
+      "risk": "medium",
+      "reward": "high"
+    },
+    {
+      "name": "深藏不露",
+      "description": {
+        "zh": "全程不跳女巫，暗中使用药物影响局势",
+        "en": "Never reveal Witch, secretly use potions to influence game"
+      },
+      "risk": "low",
+      "reward": "medium"
+    }
+  ],
+  "common_mistakes": [
+    {
+      "zh": "第一晚盲救边缘玩家，浪费解药",
+      "en": "Night one blind saving marginal player, wasting heal"
+    },
+    {
+      "zh": "过早跳出女巫身份，成为狼人目标",
+      "en": "Revealing Witch identity too early, becoming werewolf target"
+    },
+    {
+      "zh": "盲毒好人，帮助狼人阵营",
+      "en": "Blind poisoning villager, helping werewolf team"
+    },
+    {
+      "zh": "两瓶药都不用就被淘汰，浪费技能",
+      "en": "Getting eliminated without using either potion, wasting abilities"
+    },
+    {
+      "zh": "同一晚想同时使用解药和毒药（规则不允许）",
+      "en": "Trying to use both potions same night (rules don't allow)"
+    }
+  ],
+  "tips": [
+    {
+      "zh": "女巫是狼队的高优先级目标，要善于隐藏身份",
+      "en": "Witch is high priority target for wolves, must hide identity well"
+    },
+    {
+      "zh": "解药和毒药的使用时机比使用本身更重要",
+      "en": "Timing of potion use is more important than the use itself"
+    },
+    {
+      "zh": "如果预言家被刀，优先考虑救预言家",
+      "en": "If Seer is killed, prioritize saving the Seer"
+    },
+    {
+      "zh": "毒药可以在夜间直接减少狼人数量，非常强力",
+      "en": "Poison can directly reduce werewolf count at night, very powerful"
+    },
+    {
+      "zh": "女巫不能毒被狼人刀死的玩家（已经死亡）",
+      "en": "Witch cannot poison player killed by werewolves (already dead)"
+    },
+    {
+      "zh": "如果猎人被毒死，猎人不能开枪（特殊规则）",
+      "en": "If Hunter is poisoned, Hunter cannot shoot (special rule)"
+    }
+  ],
+  "difficulty_rating": {
+    "beginner": "hard",
+    "intermediate": "medium",
+    "expert": "easy"
+  },
+  "role_priority": "high",
+  "typical_survival_time": "mid-game"
+}

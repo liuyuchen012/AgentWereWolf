@@ -1,0 +1,9 @@
+{
+    "provider": "deepseek",
+    "model": "deepseek-chat",
+    "api_base": "https://api.deepseek.com",
+    "api_key": "",
+    "temperature": 0.7,
+    "max_tokens": 2000,
+    "description": "DeepSeek Chat - 默认模型，api_base 和 api_key 从 .env 读取"
+}

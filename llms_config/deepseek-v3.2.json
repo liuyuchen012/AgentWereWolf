@@ -1,0 +1,9 @@
+{
+    "provider": "dashscope",
+    "model": "deepseek-v3.2",
+    "api_base": "",
+    "api_key": "",
+    "temperature": 0.8,
+    "max_tokens": 2000,
+    "description": "DeepSeek V3.2 (via DashScope)"
+}

@@ -1,0 +1,9 @@
+{
+    "provider": "dashscope",
+    "model": "qwen-plus",
+    "api_base": "",
+    "api_key": "",
+    "temperature": 0.7,
+    "max_tokens": 2000,
+    "description": "通义千问 Plus"
+}

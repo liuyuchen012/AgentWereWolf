@@ -1,0 +1,192 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>WolfCha 狼人杀</title>
+    <link rel="stylesheet" href="/static/style.css">
+</head>
+<body>
+    <div id="app">
+        <!-- 欢迎界面 -->
+        <div id="welcome-screen" class="screen active">
+            <div class="welcome-content">
+                <h1 class="title">🐺 WolfCha</h1>
+                <h2 class="subtitle">AI 狼人杀游戏</h2>
+
+                <div class="setup-form">
+                    <div class="form-group">
+                        <label>玩家人数</label>
+                        <select id="player-count">
+                            <option value="8">8人局</option>
+                            <option value="9">9人局</option>
+                            <option value="10" selected>10人局</option>
+                            <option value="11">11人局</option>
+                            <option value="12">12人局</option>
+                        </select>
+                    </div>
+
+                    <div class="form-group">
+                        <label>难度</label>
+                        <select id="difficulty">
+                            <option value="easy">简单</option>
+                            <option value="normal" selected>普通</option>
+                            <option value="hard">困难</option>
+                        </select>
+                    </div>
+
+                    <div class="form-group">
+                        <label>你的名字</label>
+                        <input type="text" id="human-name" placeholder="输入你的名字" value="玩家">
+                    </div>
+
+                    <button id="create-room-btn" class="btn btn-primary" style="width:100%">创建房间</button>
+                </div>
+
+                <div class="rules-hint">
+                    <h3>角色说明</h3>
+                    <div class="roles-grid">
+                        <div class="role-item village">
+                            <span class="role-icon">👁️</span>
+                            <span class="role-name">预言家</span>
+                            <span class="role-desc">每晚查验一人</span>
+                        </div>
+                        <div class="role-item village">
+                            <span class="role-icon">🧪</span>
+                            <span class="role-name">女巫</span>
+                            <span class="role-desc">解药+毒药各一</span>
+                        </div>
+                        <div class="role-item village">
+                            <span class="role-icon">🔫</span>
+                            <span class="role-name">猎人</span>
+                            <span class="role-desc">死亡时开枪</span>
+                        </div>
+                        <div class="role-item village">
+                            <span class="role-icon">🛡️</span>
+                            <span class="role-name">守卫</span>
+                            <span class="role-desc">每晚保护一人</span>
+                        </div>
+                        <div class="role-item village">
+                            <span class="role-icon">👤</span>
+                            <span class="role-name">村民</span>
+                            <span class="role-desc">投票找狼</span>
+                        </div>
+                        <div class="role-item wolf">
+                            <span class="role-icon">🐺</span>
+                            <span class="role-name">狼人</span>
+                            <span class="role-desc">每晚杀一人</span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- 房间大厅界面 -->
+        <div id="lobby-screen" class="screen">
+            <div class="lobby-content">
+                <h1 class="title" style="font-size:2.5rem">🐺 WolfCha</h1>
+                <div class="lobby-info">
+                    <div class="room-link-box">
+                        <span class="room-link-label">房间链接（分享给朋友）</span>
+                        <div class="room-link-row">
+                            <input type="text" id="room-link" readonly class="room-link-input">
+                            <button id="copy-link-btn" class="btn btn-secondary" style="padding:10px 16px">复制</button>
+                        </div>
+                    </div>
+                    <div class="lobby-meta">
+                        <span id="lobby-player-count" class="day-badge">10人局</span>
+                        <span id="lobby-difficulty" class="phase-badge">普通</span>
+                        <span id="lobby-seated-count" class="alive-badge">已入座: 0人</span>
+                    </div>
+                </div>
+
+                <div class="seats-grid" id="seats-grid"></div>
+
+                <div class="lobby-actions">
+                    <div class="lobby-name-row" id="lobby-name-row">
+                        <input type="text" id="lobby-name-input" placeholder="输入你的名字" value="" class="lobby-name-field">
+                    </div>
+                    <button id="start-game-btn" class="btn btn-primary" style="display:none;width:100%;margin-top:12px">开始游戏</button>
+                    <div id="lobby-wait-msg" class="lobby-wait-text" style="display:none">等待房主开始游戏...</div>
+                </div>
+            </div>
+        </div>
+
+        <!-- 角色展示界面 -->
+        <div id="role-reveal-screen" class="screen">
+            <div class="role-reveal-content">
+                <h2>你的身份是</h2>
+                <div id="role-card" class="role-card">
+                    <div class="role-icon-large" id="reveal-role-icon">👤</div>
+                    <div class="role-name-large" id="reveal-role-name">村民</div>
+                </div>
+                <div id="teammates-info" class="teammates-info" style="display: none;">
+                    <p>你的狼队友：</p>
+                    <div id="teammates-list"></div>
+                </div>
+                <button id="continue-btn" class="btn btn-primary">确认，开始游戏</button>
+            </div>
+        </div>
+
+        <!-- 游戏主界面 -->
+        <div id="game-screen" class="screen">
+            <div class="top-bar">
+                <div class="game-info">
+                    <span id="day-display" class="day-badge">第1天</span>
+                    <span id="phase-display" class="phase-badge">夜晚</span>
+                    <span id="alive-count" class="alive-badge">存活: 10人</span>
+                </div>
+                <div class="my-role">
+                    <span>我的身份: </span>
+                    <span id="my-role-display">村民</span>
+                </div>
+            </div>
+
+            <div class="game-main">
+                <div class="players-left">
+                    <div id="players-left-list" class="players-list"></div>
+                </div>
+
+                <div class="dialog-area">
+                    <div id="messages" class="messages-container"></div>
+
+                    <div id="action-panel" class="action-panel" style="display: none;">
+                        <div id="action-prompt" class="action-prompt"></div>
+                        <div id="action-options" class="action-options"></div>
+                        <div id="action-input-area" class="action-input-area" style="display: none;">
+                            <textarea id="speech-input" placeholder="输入你的发言..."></textarea>
+                            <button id="submit-speech-btn" class="btn btn-primary">发送</button>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="players-right">
+                    <div id="players-right-list" class="players-list"></div>
+                </div>
+            </div>
+        </div>
+
+        <!-- 游戏结束界面 -->
+        <div id="game-end-screen" class="screen">
+            <div class="game-end-content">
+                <h2 id="winner-text">游戏结束</h2>
+                <div id="final-players" class="final-players-list"></div>
+                <button id="restart-btn" class="btn btn-primary">再来一局</button>
+            </div>
+        </div>
+
+        <!-- 加载遮罩 -->
+        <div id="loading-overlay" class="loading-overlay" style="display: none;">
+            <div class="loading-spinner"></div>
+            <div class="loading-text">AI思考中...</div>
+        </div>
+
+        <!-- 日夜过渡动画 -->
+        <div id="day-night-overlay" class="day-night-overlay" style="display: none;">
+            <div class="transition-text" id="transition-text"></div>
+        </div>
+    </div>
+
+    <script src="/static/game.js?v=4"></script>
+</body>
+</html>

@@ -1,0 +1,16 @@
+{
+    "description": "示例 LLM 配置文件 - 每个座位可引用独立的模型 JSON 配置，也可内联覆盖参数",
+    "default": "deepseek-chat",
+    "players": {
+        "seat_0": "deepseek-chat",
+        "seat_1": "deepseek-chat",
+        "seat_2": "deepseek-chat",
+        "seat_3": "deepseek-chat",
+        "seat_4": "deepseek-chat",
+        "seat_5": "deepseek-chat",
+        "seat_6": "deepseek-chat",
+        "seat_7": "deepseek-chat",
+        "seat_8": "deepseek-chat",
+        "seat_9": "deepseek-chat"
+    }
+}

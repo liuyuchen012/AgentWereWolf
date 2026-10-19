@@ -1,0 +1,364 @@
+{
+  "role_id": "guard",
+  "name": {
+    "zh": "守卫",
+    "en": "Guard"
+  },
+  "alignment": "village",
+  "description": {
+    "zh": "守卫是好人阵营的保护性神职，每晚可以守护一名玩家，使其免受狼人的击杀。但守卫不能连续两晚守护同一名玩家。守卫不知道自己的守护是否成功，只能通过白天的死亡情况推测。守卫的存在可以打乱狼人的击杀计划，为好人阵营争取时间。\n\n常用策略包括：第一晚盲守可能的神职位置（如3号、7号）；优先守护已跳出的预言家；守护警长保护投票优势；在多个关键玩家之间轮换守护；守护被女巫救活的银水玩家；心理博弈预测狼人刀法；关键时刻守护自己保证守卫继续存在；采用空守策略迷惑狼人；被投出局时遗言说明守护记录帮助分析。",
+    "en": "The Guard is a protective special role who can protect one player each night from werewolf kills. However, cannot protect the same player two nights in a row. Guards don't know if protection succeeded, only inferring from daytime death announcements. The Guard's presence can disrupt werewolf kill plans and buy time for the village team.\n\nCommon strategies include: night one blind protection of likely special role positions (like 3, 7); prioritizing protection of revealed Seers; protecting Sheriff to maintain voting advantage; rotating protection among multiple key players; protecting silver water players saved by Witch; psychological games to predict werewolf kill patterns; protecting yourself at key moments to ensure Guard continues; using empty protection strategies to confuse werewolves; stating protection record in last words when voted out to help analysis."
+  },
+  "abilities": {
+    "night": {
+      "zh": "守护一名玩家，使其免受狼人击杀（不能连续两晚守护同一人）",
+      "en": "Protect one player from werewolf kills (cannot protect same player two nights in a row)"
+    },
+    "day": {
+      "zh": "参与发言和投票",
+      "en": "Participate in speeches and voting"
+    },
+    "passive": {
+      "zh": "守护成功时，被守护者不会死亡，但守卫不知道是否守护成功",
+      "en": "When protection succeeds, protected player won't die, but Guard doesn't know if protection succeeded"
+    }
+  },
+  "win_condition": {
+    "zh": "所有狼人被投票出局",
+    "en": "All werewolves are eliminated through voting"
+  },
+  "strategies": {
+    "basic": [
+      {
+        "zh": "第一晚盲守：守护可能是神职的位置（如发言靠前的玩家）",
+        "en": "Night one blind protection: Protect likely special role positions (like early speakers)"
+      },
+      {
+        "zh": "守护预言家：如果预言家跳出，优先守护预言家",
+        "en": "Protect Seer: If Seer reveals, prioritize protecting Seer"
+      },
+      {
+        "zh": "隐藏身份：不要轻易暴露守卫身份，避免成为狼人目标",
+        "en": "Hide identity: Don't easily reveal Guard identity, avoid becoming werewolf target"
+      },
+      {
+        "zh": "遵守规则：记住上一晚守护的玩家，不能连续守护",
+        "en": "Follow rules: Remember last night's protected player, cannot protect consecutively"
+      }
+    ],
+    "advanced": [
+      {
+        "zh": "盲守策略：第一晚守护特定位置（如3号、7号），这些位置常是神职",
+        "en": "Blind protection strategy: Night one protect specific positions (like 3, 7), often special roles"
+      },
+      {
+        "zh": "守护强势玩家：守护发言逻辑清晰、对好人阵营有帮助的玩家",
+        "en": "Protect strong players: Protect players with clear logic who help village team"
+      },
+      {
+        "zh": "守护警长：警长有1.5票权重，守护警长可以保护投票优势",
+        "en": "Protect Sheriff: Sheriff has 1.5 vote weight, protecting Sheriff maintains voting advantage"
+      },
+      {
+        "zh": "守护银水：女巫救的人（银水）可能是神职，值得守护",
+        "en": "Protect silver water: Player saved by Witch (silver water) may be special role, worth protecting"
+      },
+      {
+        "zh": "轮换守护：在多个关键玩家之间轮换守护，增加守护成功率",
+        "en": "Rotate protection: Rotate between multiple key players, increase protection success rate"
+      }
+    ],
+    "expert": [
+      {
+        "zh": "首夜盲守预言家位：根据经验守护最可能是预言家的位置",
+        "en": "Night one blind protect Seer position: Based on experience, protect most likely Seer position"
+      },
+      {
+        "zh": "守护自己：在关键时刻守护自己，保证守卫继续存在",
+        "en": "Protect yourself: At key moments protect yourself, ensure Guard continues to exist"
+      },
+      {
+        "zh": "心理博弈：预测狼人的刀法，提前守护可能被刀的玩家",
+        "en": "Psychological game: Predict werewolf kill pattern, protect likely targets in advance"
+      },
+      {
+        "zh": "空守策略：故意守护不太可能被刀的玩家，让狼人猜不透",
+        "en": "Empty protection: Deliberately protect unlikely targets, make werewolves unpredictable"
+      },
+      {
+        "zh": "配合女巫：如果知道女巫位置，协调保护策略避免重复",
+        "en": "Coordinate with Witch: If Witch position known, coordinate protection to avoid duplication"
+      },
+      {
+        "zh": "守护悍跳狼：反向操作，守护悍跳狼让狼人自刀失败（高级技巧）",
+        "en": "Protect fake Seer: Reverse operation, protect fake Seer to make werewolf self-kill fail (advanced)"
+      },
+      {
+        "zh": "遗言守护记录：被投出局时，遗言中说明守护记录帮助好人分析",
+        "en": "Last words protection record: When voted out, state protection record in last words to help analysis"
+      }
+    ]
+  },
+  "protection_priority": [
+    {
+      "target": "已跳出的预言家",
+      "priority": "highest",
+      "reason": {
+        "zh": "预言家是好人阵营的核心，必须保护",
+        "en": "Seer is core of village team, must protect"
+      }
+    },
+    {
+      "target": "警长",
+      "priority": "high",
+      "reason": {
+        "zh": "警长有1.5票权重，影响投票结果",
+        "en": "Sheriff has 1.5 vote weight, influences voting outcomes"
+      }
+    },
+    {
+      "target": "女巫（如果已知）",
+      "priority": "high",
+      "reason": {
+        "zh": "女巫有解药和毒药，是重要神职",
+        "en": "Witch has heal and poison, important special role"
+      }
+    },
+    {
+      "target": "强势好人",
+      "priority": "medium",
+      "reason": {
+        "zh": "逻辑清晰、带节奏能力强的好人",
+        "en": "Villagers with clear logic and strong leadership"
+      }
+    },
+    {
+      "target": "银水玩家",
+      "priority": "medium",
+      "reason": {
+        "zh": "被女巫救的玩家，可能是神职",
+        "en": "Player saved by Witch, may be special role"
+      }
+    },
+    {
+      "target": "自己",
+      "priority": "low",
+      "reason": {
+        "zh": "关键时刻保护自己，延续守卫能力",
+        "en": "Protect yourself at key moments, continue Guard ability"
+      }
+    }
+  ],
+  "night_one_strategies": [
+    {
+      "strategy": "盲守特定位置",
+      "positions": ["3号", "7号", "10号"],
+      "reason": {
+        "zh": "这些位置在狼人杀中常被认为是神职位置",
+        "en": "These positions are commonly considered special role positions in werewolf"
+      },
+      "risk": "medium"
+    },
+    {
+      "strategy": "守护发言靠前的玩家",
+      "reason": {
+        "zh": "狼人可能盲刀发言靠前的神职",
+        "en": "Werewolves may blind kill early speaking special roles"
+      },
+      "risk": "medium"
+    },
+    {
+      "strategy": "守护竞选警长的玩家",
+      "reason": {
+        "zh": "竞选警长的可能是神职，狼人可能针对",
+        "en": "Sheriff candidates may be special roles, werewolves may target"
+      },
+      "risk": "low"
+    },
+    {
+      "strategy": "守护自己",
+      "reason": {
+        "zh": "保证守卫存活，但第一晚被刀概率较低",
+        "en": "Ensure Guard survival, but low probability of being killed night one"
+      },
+      "risk": "high"
+    },
+    {
+      "strategy": "随机守护",
+      "reason": {
+        "zh": "完全随机，靠运气",
+        "en": "Completely random, rely on luck"
+      },
+      "risk": "high"
+    }
+  ],
+  "protection_patterns": [
+    {
+      "pattern": "固定守护",
+      "description": {
+        "zh": "持续守护同一类型玩家（如预言家、警长），但要遵守不连续规则",
+        "en": "Continuously protect same type of player (like Seer, Sheriff), but follow non-consecutive rule"
+      },
+      "pros": {
+        "zh": "保护关键角色，提高好人胜率",
+        "en": "Protect key roles, increase village win rate"
+      },
+      "cons": {
+        "zh": "容易被狼人预测，可能空守",
+        "en": "Easy for werewolves to predict, may protect empty"
+      }
+    },
+    {
+      "pattern": "轮换守护",
+      "description": {
+        "zh": "在多个关键玩家之间轮换守护",
+        "en": "Rotate protection among multiple key players"
+      },
+      "pros": {
+        "zh": "增加守护成功率，难以预测",
+        "en": "Increase protection success rate, hard to predict"
+      },
+      "cons": {
+        "zh": "可能错过关键保护时机",
+        "en": "May miss critical protection timing"
+      }
+    },
+    {
+      "pattern": "反向守护",
+      "description": {
+        "zh": "守护不太可能被刀的玩家，迷惑狼人",
+        "en": "Protect unlikely targets, confuse werewolves"
+      },
+      "pros": {
+        "zh": "打乱狼人节奏，制造意外",
+        "en": "Disrupt werewolf rhythm, create surprises"
+      },
+      "cons": {
+        "zh": "可能浪费守护机会",
+        "en": "May waste protection opportunities"
+      }
+    }
+  ],
+  "common_mistakes": [
+    {
+      "zh": "连续两晚守护同一人（违反规则）",
+      "en": "Protecting same player two nights in a row (violates rules)"
+    },
+    {
+      "zh": "过早跳出守卫身份，成为狼人目标",
+      "en": "Revealing Guard identity too early, becoming werewolf target"
+    },
+    {
+      "zh": "守护目标过于明显，被狼人预测",
+      "en": "Protection targets too obvious, predicted by werewolves"
+    },
+    {
+      "zh": "从不守护自己，导致守卫过早出局",
+      "en": "Never protecting yourself, leading to Guard's early elimination"
+    },
+    {
+      "zh": "守护已经死亡的玩家（记错信息）",
+      "en": "Protecting already dead player (misremembering information)"
+    }
+  ],
+  "tips": [
+    {
+      "zh": "守卫不知道自己的守护是否成功，只能通过白天的死亡情况推测",
+      "en": "Guard doesn't know if protection succeeded, can only infer from daytime death announcements"
+    },
+    {
+      "zh": "如果守护成功（平安夜），可能是守卫守护、女巫救人或狼人自刀",
+      "en": "If protection succeeds (peaceful night), may be Guard protection, Witch save, or werewolf self-kill"
+    },
+    {
+      "zh": "守卫是10人局及以上才有的角色，8-9人局没有守卫",
+      "en": "Guard only exists in 10+ player games, not in 8-9 player games"
+    },
+    {
+      "zh": "守卫的存在让狼人刀人更加困难，是重要的保护神职",
+      "en": "Guard's existence makes werewolf kills harder, important protective special role"
+    },
+    {
+      "zh": "第一晚盲守是守卫最难的决策，需要经验和直觉",
+      "en": "Night one blind protection is Guard's hardest decision, requires experience and intuition"
+    },
+    {
+      "zh": "守卫可以守护自己，但要考虑是否值得",
+      "en": "Guard can protect themselves, but consider if it's worth it"
+    }
+  ],
+  "special_scenarios": [
+    {
+      "scenario": "守护成功（平安夜）",
+      "result": {
+        "zh": "被守护者存活，但守卫不知道是否是自己的功劳",
+        "en": "Protected player survives, but Guard doesn't know if it was their doing"
+      }
+    },
+    {
+      "scenario": "守护失败（有人死亡）",
+      "result": {
+        "zh": "可能是守护目标错误，或女巫没救人",
+        "en": "May be wrong protection target, or Witch didn't save"
+      }
+    },
+    {
+      "scenario": "守护与女巫救人重叠",
+      "result": {
+        "zh": "被刀者存活，但浪费了女巫的解药",
+        "en": "Killed player survives, but wastes Witch's heal potion"
+      }
+    },
+    {
+      "scenario": "守护悍跳狼（狼人自刀）",
+      "result": {
+        "zh": "狼人自刀失败，打乱狼队计划",
+        "en": "Werewolf self-kill fails, disrupts wolf team plan"
+      }
+    },
+    {
+      "scenario": "守卫被刀",
+      "result": {
+        "zh": "守卫死亡，后续无人守护",
+        "en": "Guard dies, no more protection afterwards"
+      }
+    }
+  ],
+  "coordination_tips": [
+    {
+      "with": "预言家 (Seer)",
+      "tip": {
+        "zh": "预言家跳出后，优先守护预言家，保证查验继续",
+        "en": "After Seer reveals, prioritize protecting Seer to ensure verification continues"
+      }
+    },
+    {
+      "with": "女巫 (Witch)",
+      "tip": {
+        "zh": "如果知道女巫位置，避免守护重叠浪费资源",
+        "en": "If Witch position known, avoid overlapping protection to waste resources"
+      }
+    },
+    {
+      "with": "猎人 (Hunter)",
+      "tip": {
+        "zh": "猎人通常不需要守护，因为狼人不敢轻易刀猎人",
+        "en": "Hunter usually doesn't need protection, as werewolves hesitate to kill Hunter"
+      }
+    },
+    {
+      "with": "警长 (Sheriff)",
+      "tip": {
+        "zh": "警长有1.5票权重，是重要的守护目标",
+        "en": "Sheriff has 1.5 vote weight, important protection target"
+      }
+    }
+  ],
+  "difficulty_rating": {
+    "beginner": "hard",
+    "intermediate": "medium",
+    "expert": "easy"
+  },
+  "role_priority": "high",
+  "typical_survival_time": "mid-late-game"
+}

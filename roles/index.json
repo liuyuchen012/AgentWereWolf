@@ -1,0 +1,219 @@
+{
+  "version": "1.0",
+  "created_date": "2026-02-08",
+  "total_roles": 6,
+  "roles": [
+    {
+      "role_id": "villager",
+      "name_zh": "村民",
+      "name_en": "Villager",
+      "alignment": "village",
+      "file": "villager.json",
+      "has_night_action": false,
+      "complexity": "low",
+      "importance": "low"
+    },
+    {
+      "role_id": "werewolf",
+      "name_zh": "狼人",
+      "name_en": "Werewolf",
+      "alignment": "wolf",
+      "file": "werewolf.json",
+      "has_night_action": true,
+      "complexity": "high",
+      "importance": "highest"
+    },
+    {
+      "role_id": "seer",
+      "name_zh": "预言家",
+      "name_en": "Seer",
+      "alignment": "village",
+      "file": "seer.json",
+      "has_night_action": true,
+      "complexity": "high",
+      "importance": "highest"
+    },
+    {
+      "role_id": "witch",
+      "name_zh": "女巫",
+      "name_en": "Witch",
+      "alignment": "village",
+      "file": "witch.json",
+      "has_night_action": true,
+      "complexity": "high",
+      "importance": "high"
+    },
+    {
+      "role_id": "hunter",
+      "name_zh": "猎人",
+      "name_en": "Hunter",
+      "alignment": "village",
+      "file": "hunter.json",
+      "has_night_action": false,
+      "complexity": "medium",
+      "importance": "medium"
+    },
+    {
+      "role_id": "guard",
+      "name_zh": "守卫",
+      "name_en": "Guard",
+      "alignment": "village",
+      "file": "guard.json",
+      "has_night_action": true,
+      "complexity": "high",
+      "importance": "high"
+    }
+  ],
+  "alignments": {
+    "village": {
+      "name_zh": "好人阵营",
+      "name_en": "Village Team",
+      "roles": ["villager", "seer", "witch", "hunter", "guard"],
+      "win_condition_zh": "所有狼人被投票出局",
+      "win_condition_en": "All werewolves are eliminated through voting"
+    },
+    "wolf": {
+      "name_zh": "狼人阵营",
+      "name_en": "Wolf Team",
+      "roles": ["werewolf"],
+      "win_condition_zh": "狼人数量 ≥ 好人数量",
+      "win_condition_en": "Werewolf count ≥ Village count"
+    }
+  },
+  "game_configurations": {
+    "8_players": {
+      "werewolf": 3,
+      "seer": 1,
+      "witch": 1,
+      "hunter": 1,
+      "guard": 0,
+      "villager": 2
+    },
+    "9_players": {
+      "werewolf": 3,
+      "seer": 1,
+      "witch": 1,
+      "hunter": 1,
+      "guard": 0,
+      "villager": 3
+    },
+    "10_players": {
+      "werewolf": 3,
+      "seer": 1,
+      "witch": 1,
+      "hunter": 1,
+      "guard": 1,
+      "villager": 3
+    },
+    "11_players": {
+      "werewolf": 4,
+      "seer": 1,
+      "witch": 1,
+      "hunter": 1,
+      "guard": 1,
+      "villager": 3
+    },
+    "12_players": {
+      "werewolf": 4,
+      "seer": 1,
+      "witch": 1,
+      "hunter": 1,
+      "guard": 1,
+      "villager": 4
+    }
+  },
+  "strategy_levels": {
+    "basic": {
+      "name_zh": "基础策略",
+      "name_en": "Basic Strategies",
+      "target_audience_zh": "新手玩家",
+      "target_audience_en": "Beginner players"
+    },
+    "advanced": {
+      "name_zh": "进阶策略",
+      "name_en": "Advanced Strategies",
+      "target_audience_zh": "中级玩家",
+      "target_audience_en": "Intermediate players"
+    },
+    "expert": {
+      "name_zh": "专家策略",
+      "name_en": "Expert Strategies",
+      "target_audience_zh": "高级玩家",
+      "target_audience_en": "Expert players"
+    }
+  },
+  "terminology": {
+    "悍跳": {
+      "pinyin": "hàn tiào",
+      "en": "Fake claim",
+      "definition_zh": "狼人假装自己是神职（通常是预言家）",
+      "definition_en": "Werewolf pretending to be a special role (usually Seer)"
+    },
+    "深水": {
+      "pinyin": "shēn shuǐ",
+      "en": "Deep wolf",
+      "definition_zh": "隐藏身份，不跳神职的狼人",
+      "definition_en": "Werewolf who hides identity and doesn't fake claim"
+    },
+    "警徽流": {
+      "pinyin": "jǐng huī liú",
+      "en": "Badge flow",
+      "definition_zh": "预言家计划的查验顺序",
+      "definition_en": "Seer's planned verification order"
+    },
+    "银水": {
+      "pinyin": "yín shuǐ",
+      "en": "Silver water",
+      "definition_zh": "被女巫救活的玩家",
+      "definition_en": "Player saved by the Witch"
+    },
+    "盲毒": {
+      "pinyin": "máng dú",
+      "en": "Blind poison",
+      "definition_zh": "女巫第一晚没有信息时使用毒药",
+      "definition_en": "Witch using poison on night one without information"
+    },
+    "盲守": {
+      "pinyin": "máng shǒu",
+      "en": "Blind protection",
+      "definition_zh": "守卫第一晚没有信息时守护",
+      "definition_en": "Guard protecting on night one without information"
+    },
+    "盲验": {
+      "pinyin": "máng yàn",
+      "en": "Blind verification",
+      "definition_zh": "预言家第一晚没有信息时查验",
+      "definition_en": "Seer verifying on night one without information"
+    },
+    "刀": {
+      "pinyin": "dāo",
+      "en": "Kill",
+      "definition_zh": "狼人击杀玩家的行为",
+      "definition_en": "Werewolf killing a player"
+    },
+    "带人": {
+      "pinyin": "dài rén",
+      "en": "Take someone",
+      "definition_zh": "猎人开枪带走一名玩家",
+      "definition_en": "Hunter shooting and taking a player with them"
+    },
+    "平安夜": {
+      "pinyin": "píng ān yè",
+      "en": "Peaceful night",
+      "definition_zh": "夜晚没有人死亡",
+      "definition_en": "Night with no deaths"
+    },
+    "自刀": {
+      "pinyin": "zì dāo",
+      "en": "Self-kill",
+      "definition_zh": "狼人击杀自己的队友制造假象",
+      "definition_en": "Werewolf killing their own teammate to create illusion"
+    },
+    "屠边": {
+      "pinyin": "tú biān",
+      "en": "Side slaughter",
+      "definition_zh": "狼人集中击杀一侧的玩家",
+      "definition_en": "Werewolves focusing kills on one side of seating"
+    }
+  }
+}
